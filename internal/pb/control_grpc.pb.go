@@ -4,7 +4,7 @@
 // - protoc             v3.12.4
 // source: control.proto
 
-package axonserver
+package pb
 
 import (
 	context "context"

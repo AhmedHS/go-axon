@@ -4,7 +4,7 @@
 // 	protoc        v3.12.4
 // source: admin.proto
 
-package axonserver
+package pb
 
 import (
 	empty "github.com/golang/protobuf/ptypes/empty"
@@ -742,9 +742,9 @@ type ReplicationGroupMember struct {
 
 	NodeName      string `protobuf:"bytes,1,opt,name=node_name,json=nodeName,proto3" json:"node_name,omitempty"`
 	Host          string `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
-	Port          int32  `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	Role          Role   `protobuf:"varint,4,opt,name=role,proto3,enum=io.axoniq.axonserver.grpc.admin.Role" json:"role,omitempty"`
-	PendingDelete bool   `protobuf:"varint,5,opt,name=pendingDelete,proto3" json:"pendingDelete,omitempty"`
+	Port          int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	Role          Role  `protobuf:"varint,4,opt,name=role,proto3,enum=io.axoniq.axonserver.grpc.admin.Role" json:"role,omitempty"`
+	PendingDelete bool  `protobuf:"varint,5,opt,name=pendingDelete,proto3" json:"pendingDelete,omitempty"`
 }
 
 func (x *ReplicationGroupMember) Reset() {
@@ -867,8 +867,8 @@ type JoinReplicationGroup struct {
 	unknownFields protoimpl.UnknownFields
 
 	ReplicationGroupName string `protobuf:"bytes,1,opt,name=replication_group_name,json=replicationGroupName,proto3" json:"replication_group_name,omitempty"`
-	NodeName             string `protobuf:"bytes,2,opt,name=node_name,json=nodeName,proto3" json:"node_name,omitempty"`
-	Role                 Role   `protobuf:"varint,3,opt,name=role,proto3,enum=io.axoniq.axonserver.grpc.admin.Role" json:"role,omitempty"`
+	NodeName string `protobuf:"bytes,2,opt,name=node_name,json=nodeName,proto3" json:"node_name,omitempty"`
+	Role     Role   `protobuf:"varint,3,opt,name=role,proto3,enum=io.axoniq.axonserver.grpc.admin.Role" json:"role,omitempty"`
 }
 
 func (x *JoinReplicationGroup) Reset() {

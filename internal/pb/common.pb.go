@@ -4,7 +4,7 @@
 // 	protoc        v3.12.4
 // source: common.proto
 
-package axonserver
+package pb
 
 import (
 	_ "github.com/golang/protobuf/ptypes/any"
