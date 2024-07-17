@@ -7,7 +7,9 @@ import (
 	"google.golang.org/grpc"
 )
 
-type AxonClient interface{}
+type AxonClient interface {
+	CommandGateway() CommandGateway
+}
 
 // Options for the configuration of the Axon client.
 type Options struct {
@@ -50,9 +52,7 @@ func Dial(ctx context.Context, options Options) (AxonClient, error) {
 
 	if platform.SameConnection {
 		return &axonClient{
-			grpcConnection: grpcConnection,
-			commandClient:  pb.NewCommandServiceClient(grpcConnection),
-			eventClient:    pb.NewEventStoreClient(grpcConnection),
+			commandGateway: NewCommandGateway(options, grpcConnection),
 		}, nil
 	}
 
@@ -68,14 +68,14 @@ func Dial(ctx context.Context, options Options) (AxonClient, error) {
 	}
 
 	return &axonClient{
-		grpcConnection: nodeGrpcConnection,
-		commandClient:  pb.NewCommandServiceClient(nodeGrpcConnection),
-		eventClient:    pb.NewEventStoreClient(nodeGrpcConnection),
+		commandGateway: NewCommandGateway(options, nodeGrpcConnection),
 	}, nil
 }
 
 type axonClient struct {
-	grpcConnection *grpc.ClientConn
-	commandClient  pb.CommandServiceClient
-	eventClient    pb.EventStoreClient
+	commandGateway CommandGateway
+}
+
+func (c *axonClient) CommandGateway() CommandGateway {
+	return c.commandGateway
 }
